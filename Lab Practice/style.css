@@ -1,0 +1,29 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background-color: #f7f7f7;
+    padding: 40px;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 4px;
+}
+h2 {
+    width: 420px; 
+    text-align: left; 
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+table{
+    width: 50%;
+    border-spacing: 0px 20px;
+}
