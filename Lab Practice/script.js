@@ -16,6 +16,7 @@ else{
     console.log("Phone: " + phonenumber);
     console.log("Message: " + message);
 
-    return false;
+    alert("Submitted successfully!");
+    return false;    
 }
 }
