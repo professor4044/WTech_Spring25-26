@@ -27,3 +27,29 @@ table{
     width: 50%;
     border-spacing: 0px 20px;
 }
+label {
+    font-size: 10px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0px;
+}
+input[type="text"], input[type="email"], input[type="tel"], textarea {
+    //width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    background-color: #1e392a;
+    color: white;
+    padding: 10px 35px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+input[type="submit"]:hover {
+    background-color: #2d543e;
+}
+
+
