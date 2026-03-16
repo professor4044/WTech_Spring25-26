@@ -1,5 +1,6 @@
 const unitPrice = 1000;
 const days = 30;
+
 const quantityInput = document.getElementById("quantityPerDay");
 const totalPriceInput = document.getElementById("totalPrice");
 
@@ -12,3 +13,12 @@ function calculateTotal() {
         quantityInput.value = 0;
 }
 
+let totalPrice = quantityPerDay * unitPrice * days;
+totalPriceInput.value = totalPrice;
+
+    if (totalPrice > 1000) {
+        alert("Congratulations! You are eligible for a gift coupon.");
+    }
+}
+
+quantityInput.addEventListener("input", calculateTotal);
