@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $website = $_REQUEST["website"];
     $comment = $_REQUEST["comment"];
     $gender = $_REQUEST["gender"];
-    $email = $_REQUEST["email"];
 
 }
    
