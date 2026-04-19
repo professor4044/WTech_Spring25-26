@@ -13,15 +13,23 @@ include"../Controller/RegistrationController.php";
         <table>
             <tr>
                 <td><label for="name">Name:</label></td>
-                <td><input type="text" id="name" name="name"></td>
+                <td>
+                    <input type="text" id="name" name="name">
+                    <?php echo $nameErr ?? ''; ?>
+                </td>
             </tr>
             <tr>
                 <td><label for="email">Email:</label></td>
-                <td><input type="text" id="email" name="email"></td>
+                <td>
+                    <input type="text" id="email" name="email">
+                    <?php echo $emailErr ?? ''; ?>
+                </td>
             </tr>
                 <tr>
                     <td><label for="website">Website:</label></td>
-                    <td><input type="url" id="website" name="website"></td> 
+                    <td>
+                        <input type="url" id="website" name="website">
+                    </td> 
                 </tr>
                 <tr>
                     <td><label for="comment">Comment:</label></td>
@@ -30,9 +38,10 @@ include"../Controller/RegistrationController.php";
                 <tr>
                     <td><label for="gender">Gender:</label></td>
                     <td>
-                        <input type="radio" id="female" name="gender" value="female">Female
-                        <input type="radio" id="male" name="gender" value="male">Male
-                        <input type="radio" id="other" name="gender" value="other">Other
+                        <input type="radio" name="gender" value="female" <?php if (isset($_POST['gender']) && $_POST['gender'] == "female") echo "checked";?>> Female
+                        <input type="radio" name="gender" value="male" <?php if (isset($_POST['gender']) && $_POST['gender'] == "male") echo "checked";?>> Male
+                        <input type="radio" name="gender" value="other" <?php if (isset($_POST['gender']) && $_POST['gender'] == "other") echo "checked";?>> Other
+                        <?php echo $genderErr ?? ''; ?>
                     </td>
                 </tr>
                 <tr>
