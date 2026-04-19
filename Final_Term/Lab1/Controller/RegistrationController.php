@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $generalErr = "<p><span style='color: red; font-weight: bold;'>* Required fields</span></p>";
     }
 
-    if(!emply($name))
+    if(!empty($name))
         {
             echo "User Name: " . $name . "<br>";
         }
