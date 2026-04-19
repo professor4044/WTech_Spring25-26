@@ -9,7 +9,7 @@ include"../Controller/RegistrationController.php";
 </head>
 <body>
     <h2>PHP Form Validation Example</h2>
-    <form>
+    <form method = "post" action="">
         <table>
             <tr>
                 <td><label for="name">Name:</label></td>
@@ -21,7 +21,7 @@ include"../Controller/RegistrationController.php";
             </tr>
                 <tr>
                     <td><label for="website">Website:</label></td>
-                    <td><input type="text" id="website" name="website"></td> 
+                    <td><input type="url" id="website" name="website"></td> 
                 </tr>
                 <tr>
                     <td><label for="comment">Comment:</label></td>
