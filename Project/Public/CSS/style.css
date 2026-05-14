@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0;
+}
+body {
+    font-family: Arial; sans-serif;
+    background: #f4f6f8;
+}          
+
+nav { 
+    background: #2c3e50;
+    padding: 14px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 16px;
+}
+
+nav .brand {
+    color: white;
+    font-size: 20px; 
+    font-weight: bold;
+}
+.ocntainer{
+    max-width: 1100px; 
+    margin: 30px auto;
+    padding: 0 20px;
+}
+.search-bar input {
+    width: 100%; 
+    padding: 10px 14px;
+    border: 1px solid #ccc; 
+    border-radius: 6px;
+    font-size: 15px; 
+    margin-bottom: 16px;
+}
+.filters {
+    display: flex; 
+    gap: 10px; 
+    flex-wrap: wrap; 
+    margin-bottom: 24px;
+}
+.filters select, .filters input{
+     padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px; 
+    background: white;
+}
+.filters button{
+    padding: 8px 16px;
+    background: #2c3e50;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#job-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+.job-card{
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+.job-card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+.job-card .company {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+}
+.job-card .meta {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 16px;
+}
+.job-card .actions {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 16px;
+    align-items: center;
+    display: flex; 
+}
+.btn-view {
+    background: #2c3e50; 
+    color: white; 
+    padding: 8px 16px;
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-size: 14px;
+}
+.heart-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #e74c3c;
+    cursor: pointer;
+    margin-left: auto;
+}
+.no-jobs {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+    margin-top: 40px;
+}

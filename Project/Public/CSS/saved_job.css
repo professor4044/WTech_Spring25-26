@@ -1,0 +1,58 @@
+.saved-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saved-info h3 { 
+    font-size: 17px; 
+    color: #2c3e50; 
+    margin-bottom: 6px; 
+}
+
+.saved-info .company { 
+    color: #666; 
+    font-size: 14px; 
+    margin-bottom: 6px; 
+}
+
+.saved-info .meta { 
+    font-size: 13px; 
+    color: #888; 
+}
+
+.saved-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-view {
+    background: #2c3e50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.btn-view:hover { 
+    background: #1a252f; 
+}
+
+.btn-remove {
+    background: none;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.btn-remove:hover { 
+    background: #fde8e8; 
+}

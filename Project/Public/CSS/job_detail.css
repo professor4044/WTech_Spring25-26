@@ -1,0 +1,89 @@
+.detail-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.detail-card h1 { 
+    font-size: 24px; 
+    color: #2c3e50; 
+    margin-bottom: 8px; 
+}
+.company-name { 
+    font-size: 16px; 
+    color: #555; 
+    margin-bottom: 16px; 
+}
+.meta-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.meta-box span {
+    background: #f0f4f8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #444;
+}
+.deadline { 
+    color: #e74c3c; 
+    font-size: 14px; 
+    margin-bottom: 20px; 
+}
+.section { 
+    margin-bottom: 24px; 
+}
+.section h3 {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 6px;
+}
+.section p { 
+    font-size: 14px; 
+    color: #555; 
+    line-height: 1.7; 
+}
+.section a { 
+    color: #2980b9; 
+    font-size: 13px; 
+}
+.actions { 
+    display: flex; 
+    gap: 12px; 
+    align-items: center; 
+}
+.btn-apply {
+    background: #27ae60;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 15px;
+}
+.btn-apply:hover { 
+    background: #1e8449; 
+}
+.btn-applied {
+    background: #95a5a6;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 15px;
+    border: none;
+    cursor: not-allowed;
+}
+.heart-btn {
+    background: none;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 16px;
+    border-radius: 6px;
+}
+.heart-btn.saved { 
+    border-color: #e74c3c; 
+}
