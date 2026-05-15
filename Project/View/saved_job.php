@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Saved Jobs</title>
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/saved-jobs.css">
+    <link rel="stylesheet" href="../Public/CSS/style.css">
+    <link rel="stylesheet" href="../Public/CSS/saved_job.css">
 </head>
 <body>
 
 <nav>
     <span class="brand">JobPortal</span>
     <div>
-        <a href="JobController.php?action=index">Job Board</a>
-        <a href="ApplicationController.php?action=myApplications">My Applications</a>
-        <a href="SavedJobController.php">Saved Jobs</a>
-        <a href="logout.php">Logout</a>
+        <a href="../Controller/JobController.php?action=index">Job Board</a>
+        <a href="../Controller/ApplicationController.php?action=myApplications">My Applications</a>
+        <a href="../Controller/SavedJobController.php">Saved Jobs</a>
+        <a href="../View/logout.php">Logout</a>
     </div>
 </nav>
 
@@ -52,7 +52,7 @@
                     <!-- Buttons -->
                     <div class="saved-actions">
                         <a class="btn-view"
-                           href="JobController.php?action=show&id=<?= $id ?>">
+                           href="../Controller/JobController.php?action=show&id=<?= $id ?>">
                             View Details
                         </a>
                         <button class="btn-remove"
@@ -68,7 +68,7 @@
 
 </div>
 
-<script src="../public/js/saved-jobs.js"></script>
+<script src="../Public/JS/saved_job.js"></script>
 
 </body>
 </html>

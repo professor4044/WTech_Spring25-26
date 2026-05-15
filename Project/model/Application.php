@@ -1,20 +1,22 @@
 <?php
 
 class Application {
-    private $pdo;
+    private $conn;
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
     public function hasApplied($job_id, $seeker_id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT id FROM applications
             WHERE job_id = ? AND seeker_id = ?
         ");
-        $stmt->execute([$job_id, $seeker_id]);
+        $stmt->bind_param('ii', $job_id, $seeker_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($stmt->fetch()) {
+        if ($result->num_rows > 0) {
             return true;
         } else {
             return false;
@@ -22,17 +24,18 @@ class Application {
     }
 
     public function apply($job_id, $seeker_id, $cover_letter, $resume_path) {
-        $stmt = $this->pdo->prepare("
-            INSERT INTO applications 
+        $stmt = $this->conn->prepare("
+            INSERT INTO applications
                 (job_id, seeker_id, cover_letter, resume_path, status, created_at)
-            VALUES 
+            VALUES
                 (?, ?, ?, ?, 'Submitted', NOW())
         ");
-        return $stmt->execute([$job_id, $seeker_id, $cover_letter, $resume_path]);
+        $stmt->bind_param('iiss', $job_id, $seeker_id, $cover_letter, $resume_path);
+        return $stmt->execute();
     }
 
     public function getMyApplications($seeker_id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT a.*,
                    j.title AS job_title,
                    j.location,
@@ -45,17 +48,21 @@ class Application {
             WHERE a.seeker_id = ?
             ORDER BY a.created_at DESC
         ");
-        $stmt->execute([$seeker_id]);
-        return $stmt->fetchAll();
+        $stmt->bind_param('i', $seeker_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getSeekerResume($seeker_id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT file_path FROM users
             WHERE id = ?
         ");
-        $stmt->execute([$seeker_id]);
-        $row = $stmt->fetch();
+        $stmt->bind_param('i', $seeker_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row    = $result->fetch_assoc();
 
         if ($row) {
             return $row['file_path'];

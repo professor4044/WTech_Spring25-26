@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Apply Form</title>
+    <link rel="stylesheet" href="../Public/CSS/style.css">
+    <link rel="stylesheet" href="../Public/CSS/apply_form.css">
 </head>
 <body>
 
 <nav>
     <span class="brand">JobPortal</span>
     <div>
-        <a href="">Job Board</a>
-        <a href="">My Applications</a>
-        <a href="">Saved Jobs</a>
-        <a href="">Logout</a>
+        <a href="../Controller/JobController.php?action=index">Job Board</a>
+        <a href="../Controller/ApplicationController.php?action=myApplications">My Applications</a>
+        <a href="../Controller/SavedJobController.php">Saved Jobs</a>
+        <a href="../View/logout.php">Logout</a>
     </div>
 </nav>
 
 <div class="container">
 
     <!-- Back Button -->
-    <a href="JobController.php?action=show&id=<?= $job['id'] ?>"
+    <a href="../Controller/JobController.php?action=show&id=<?= $job['id'] ?>"
        style="display:inline-block; margin-bottom:20px; color:#2980b9;">
-        ← Back to Job
+        Back to Job
     </a>
     <div class="form-card">
 
@@ -85,7 +87,7 @@
     </div>
 </div>
 
-<script src=""></script>
+<script src="../Public/JS/apply_form.js"></script>
 
     
 </body>

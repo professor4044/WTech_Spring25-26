@@ -1,19 +1,12 @@
 <?php
 
 $host     = 'localhost';
-$db_name  = 'job_portal';
 $username = 'root';
 $password = '';
+$db_name  = 'job_portal';
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$db_name;charset=utf8",
-        $username,
-        $password
-    );
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+$conn = new mysqli($host, $username, $password, $db_name);
 
-} catch (PDOException $e) {
-    die('Connection failed: ' . $e->getMessage());
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
 }

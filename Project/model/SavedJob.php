@@ -1,20 +1,22 @@
 <?php
 
 class SavedJob {
-    private $pdo;
+    private $conn;
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
     public function isSaved($user_id, $job_id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT id FROM saved_jobs
             WHERE user_id = ? AND job_id = ?
         ");
-        $stmt->execute([$user_id, $job_id]);
+        $stmt->bind_param('ii', $user_id, $job_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($stmt->fetch()) {
+        if ($result->num_rows > 0) {
             return true;
         } else {
             return false;
@@ -23,24 +25,26 @@ class SavedJob {
 
     public function toggle($user_id, $job_id) {
         if ($this->isSaved($user_id, $job_id)) {
-            $stmt = $this->pdo->prepare("
+            $stmt = $this->conn->prepare("
                 DELETE FROM saved_jobs
                 WHERE user_id = ? AND job_id = ?
             ");
-            $stmt->execute([$user_id, $job_id]);
+            $stmt->bind_param('ii', $user_id, $job_id);
+            $stmt->execute();
             return 'unsaved';
         } else {
-            $stmt = $this->pdo->prepare("
+            $stmt = $this->conn->prepare("
                 INSERT INTO saved_jobs (user_id, job_id, created_at)
                 VALUES (?, ?, NOW())
             ");
-            $stmt->execute([$user_id, $job_id]);
+            $stmt->bind_param('ii', $user_id, $job_id);
+            $stmt->execute();
             return 'saved';
         }
     }
 
     public function getSavedJobs($user_id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT j.*,
                    c.name AS category_name,
                    ep.company_name
@@ -53,17 +57,21 @@ class SavedJob {
             AND j.deadline >= CURDATE()
             ORDER BY sj.created_at DESC
         ");
-        $stmt->execute([$user_id]);
-        return $stmt->fetchAll();
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getSavedJobIds($user_id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT job_id FROM saved_jobs
             WHERE user_id = ?
         ");
-        $stmt->execute([$user_id]);
-        $rows = $stmt->fetchAll();
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $rows   = $result->fetch_all(MYSQLI_ASSOC);
 
         $ids = [];
         foreach ($rows as $row) {

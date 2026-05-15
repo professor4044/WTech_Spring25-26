@@ -2,16 +2,16 @@
 session_start();
 
 require_once '../config/database.php';
-require_once '../models/Application.php';
-require_once '../models/Job.php';
+require_once '../model/Application.php';
+require_once '../model/job.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seeker') {
-    header('Location: ../views/login.php');
+    header('Location: ../View/login.php');
     exit;
 }
 
-$appModel = new Application($pdo);
-$jobModel = new Job($pdo);
+$appModel = new Application($conn);
+$jobModel = new Job($conn);
 
 $action = $_GET['action'] ?? 'myApplications';
 
@@ -25,7 +25,7 @@ if ($action === 'apply') {
 
     if ($appModel->hasApplied($job_id, $_SESSION['user_id'])) {
         $_SESSION['error'] = 'You applied this job before.';
-        header('Location: ../controllers/JobController.php?action=show&id=' . $job_id);
+        header('Location: ../Controller/JobController.php?action=show&id=' . $job_id);
         exit;
     }
 
@@ -61,9 +61,9 @@ if ($action === 'apply') {
                     $errors[] = 'File size should not over 2 MB';
                 } else {
                     $filename    = uniqid('resume_') . '.pdf';
-                    $upload_path = '../public/uploads/' . $filename;
+                    $upload_path = '../Public/uploads/' . $filename;
                     move_uploaded_file($file['tmp_name'], $upload_path);
-                    $resume_path = 'public/uploads/' . $filename;
+                    $resume_path = 'Public/uploads/' . $filename;
                 }
             } else {
                 $errors[] = 'Upload a Resume.';
@@ -73,25 +73,25 @@ if ($action === 'apply') {
         if (empty($errors)) {
             $appModel->apply($job_id, $_SESSION['user_id'], $cover_letter, $resume_path);
             $_SESSION['success'] = 'Applied Successfully.';
-            header('Location: ../controllers/ApplicationController.php?action=myApplications');
+            header('Location: ../Controller/ApplicationController.php?action=myApplications');
             exit;
         }
 
         $profile_resume = $appModel->getSeekerResume($_SESSION['user_id']);
-        require_once '../views/apply-form.php';
+        require_once '../View/apply_form.php';
 
     } else {
         $errors         = [];
         $profile_resume = $appModel->getSeekerResume($_SESSION['user_id']);
-        require_once '../views/apply-form.php';
+        require_once '../View/apply_form.php';
     }
 
 } elseif ($action === 'myApplications') {
     $applications = $appModel->getMyApplications($_SESSION['user_id']);
-    require_once '../views/my-applications.php';
+    require_once '../View/my_application.php';
 
 } else {
-    header('Location: ?action=myApplications');
+    header('Location: ?action=myApplication');
     exit;
 }
 ?>

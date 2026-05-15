@@ -2,15 +2,15 @@
 session_start();
 
 require_once '../config/database.php';
-require_once '../models/SavedJob.php';
+require_once '../model/SavedJob.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seeker') {
-    header('Location: ../views/login.php');
+    header('Location: ../View/login.php');
     exit;
 }
 
-$savedJobModel = new SavedJob($pdo);
+$savedJobModel = new SavedJob($conn);
 
 $savedJobs = $savedJobModel->getSavedJobs($_SESSION['user_id']);
 
-require_once '../views/saved-jobs.php';
+require_once '../View/saved_job.php';

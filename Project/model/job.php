@@ -1,28 +1,30 @@
 <?php
 
 class Job {
-    private $pdo;
+    private $conn;
 
-    public function __construct($pdo) {
-        $this ->pdo = $pdo;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
+
     public function getActiveJobs() {
-        $stmt = $this->pdo->prepare("SELECT j.*,
-                                            c.name AS category_name,
-                                            ep.company_name
-                                    FROM jobs j
-                                    LEFT JOIN categories c ON j. category_id = c.id
-                                    LEFT JOIN employer_profiles ep ON j.employer_id = ep.user_id
-                                    WHERE j.status = 'active' 
-                                    AND j.deadline >= CURDATE()
-                                    ORDER BY j.created_at DESC
-        ");
-        $stmt->execute();
-        return $stmt->fetchAll();
+        $sql  = "
+            SELECT j.*, 
+                   c.name AS category_name,
+                   ep.company_name
+            FROM jobs j
+            LEFT JOIN categories c ON j.category_id = c.id
+            LEFT JOIN employer_profiles ep ON j.employer_id = ep.user_id
+            WHERE j.status = 'active'
+            AND j.deadline >= CURDATE()
+            ORDER BY j.created_at DESC
+        ";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getJobById($id) {
-        $stmt = $this->pdo->prepare("
+        $stmt = $this->conn->prepare("
             SELECT j.*, 
                    c.name AS category_name,
                    ep.company_name,
@@ -34,13 +36,15 @@ class Job {
             LEFT JOIN employer_profiles ep ON j.employer_id = ep.user_id
             WHERE j.id = ?
         ");
-        $stmt->execute([$id]);
-        return $stmt->fetch();
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 
     public function searchJobs($q) {
         $keyword = '%' . $q . '%';
-        $stmt = $this->pdo->prepare("
+        $stmt    = $this->conn->prepare("
             SELECT j.*, 
                    c.name AS category_name,
                    ep.company_name
@@ -56,13 +60,14 @@ class Job {
             )
             ORDER BY j.created_at DESC
         ");
-        $stmt->execute([$keyword, $keyword, $keyword]);
-        return $stmt->fetchAll();
+        $stmt->bind_param('sss', $keyword, $keyword, $keyword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-     public function filterJobs($category_id, $location, $job_type, $salary) {
-        // Base query
-        $sql = "
+    public function filterJobs($category_id, $location, $job_type, $salary) {
+        $sql    = "
             SELECT j.*, 
                    c.name AS category_name,
                    ep.company_name
@@ -72,43 +77,48 @@ class Job {
             WHERE j.status = 'active'
             AND j.deadline >= CURDATE()
         ";
-
         $params = [];
+        $types  = '';
 
         if (!empty($category_id)) {
-            $sql .= " AND j.category_id = ?";
+            $sql     .= " AND j.category_id = ?";
+            $types   .= 'i';
             $params[] = $category_id;
         }
 
         if (!empty($location)) {
-            $sql .= " AND j.location LIKE ?";
+            $sql     .= " AND j.location LIKE ?";
+            $types   .= 's';
             $params[] = '%' . $location . '%';
         }
 
         if (!empty($job_type)) {
-            $sql .= " AND j.job_type = ?";
+            $sql     .= " AND j.job_type = ?";
+            $types   .= 's';
             $params[] = $job_type;
         }
 
         if (!empty($salary)) {
-            $sql .= " AND j.salary_range LIKE ?";
+            $sql     .= " AND j.salary_range LIKE ?";
+            $types   .= 's';
             $params[] = '%' . $salary . '%';
         }
 
         $sql .= " ORDER BY j.created_at DESC";
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll();
-     }
+        $stmt = $this->conn->prepare($sql);
+
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function getCategories() {
-        $stmt = $this->pdo->prepare("
-            SELECT * FROM categories ORDER BY name
-        ");
-        $stmt->execute();
-        return $stmt->fetchAll();
+        $result = $this->conn->query("SELECT * FROM categories ORDER BY name");
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
-
-?>

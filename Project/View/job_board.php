@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Job Board</title>
-    <link rel="stylesheet" href="C:\xampp\htdocs\WTech_Spring25-26\Project\Public\CSS\style.css">
+    <link rel="stylesheet" href="../Public/CSS/style.css">
 </head>
 <body>
 
 <nav>
     <span class="brand">Job Board</span>
     <div>
-        <a href=""> Job Board </a>
-        <a href=""> My Applications </a>
-        <a href=""> Saved Jobs </a>
-        <a href=""> Logout </a>  
+        <a href="../Controller/JobController.php?action=index">Job Board</a>
+        <a href="../Controller/ApplicationController.php?action=myApplications">My Applications</a>
+        <a href="../Controller/SavedJobController.php">Saved Jobs</a>
+        <a href="../View/logout.php">Logout</a> 
     </div>
 </nav>   
 
@@ -61,7 +61,7 @@
         <?php else: ?>
               <?php foreach ($jobs as $job):
                 $isSaved  = in_array($job['id'], $savedIds);
-                $heart    = $isSaved ? "\u{2764}" : "\u{1F90D}" ;
+                $heart    = $isSaved ? '&#10084;' : '&#129293;' ;
                 $saved    = $isSaved ? 'saved' : '';
                 $title    = htmlspecialchars($job['title']);
                 $company  = htmlspecialchars($job['company_name'] ?? 'N/A');
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="actions">
-                        <a class="btn-view" href="JobController.php?action=show&id=<?= $id ?>">
+                        <a class="btn-view" href="../Controller/JobController.php?action=show&id=<?= $id ?>">
                             View Details
                         </a>
 
@@ -97,6 +97,6 @@
     </div>
 </div>
 
-<script src="C:\xampp\htdocs\WTech_Spring25-26\Project\Public\JS\job_board.js"></script>
+<script src="../Public/JS/job_board.js"></script>
 </body>
 </html>

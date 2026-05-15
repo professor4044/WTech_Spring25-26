@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>My Applications</title>
+    <link rel="stylesheet" href="../Public/CSS/style.css">
+    <link rel="stylesheet" href="../Public/CSS/my_application.css">
 </head>
 <body>
 
 <nav>
     <span class="brand">JobPortal</span>
     <div>
-        <a href="JobController.php?action=index">Job Board</a>
-        <a href="ApplicationController.php?action=myApplications">My Applications</a>
-        <a href="SavedJobController.php">Saved Jobs</a>
-        <a href="logout.php">Logout</a>
+        <a href="../Controller/JobController.php?action=index">Job Board</a>
+        <a href="../Controller/ApplicationController.php?action=myApplications">My Applications</a>
+        <a href="../Controller/SavedJobController.php">Saved Jobs</a>
+        <a href="../View/logout.php">Logout</a>
     </div>
 </nav>
 

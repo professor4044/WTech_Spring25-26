@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Job Detail</title>
+    <link rel="stylesheet" href="../Public/CSS/style.css">
+    <link rel="stylesheet" href="../Public/CSS/job_detail.css">
 </head>
 <body>
 
 <nav>
     <span class="brand">JobPortal</span>
     <div>
-        <a href="">Job Board</a>
-        <a href="">My Applications</a>
-        <a href="">Saved Jobs</a>
-        <a href="">Logout</a>
+        <a href="../Controller/JobController.php?action=index">Job Board</a>
+        <a href="../Controller/ApplicationController.php?action=myApplications">My Applications</a>
+        <a href="../Controller/SavedJobController.php">Saved Jobs</a>
+        <a href="../View/logout.php">Logout</a>
     </div>
 </nav>
 
 <div class="container">
 
     <!-- Back Button -->
-    <a href="JobController.php?action=index" style="display:inline-block; margin-bottom:20px; color:#2980b9;">
+    <a href="../Controller/JobController.php?action=index" style="display:inline-block; margin-bottom:20px; color:#2980b9;">
         Back to Job Board
     </a>
 
@@ -73,7 +75,7 @@
                 <button class="btn-applied" disabled>Applied </button>
             <?php else: ?>
                 <a class="btn-apply"
-                   href="ApplicationController.php?action=apply&job_id=<?= $job['id'] ?>">
+                   href="../Controller/ApplicationController.php?action=apply&job_id=<?= $job['id'] ?>">
                     Apply Now
                 </a>
             <?php endif; ?>
@@ -88,7 +90,7 @@
     </div>
 </div>
 
-<script src=""></script>
+<script src="../Public/JS/job_detail.js"></script>
 
 
     

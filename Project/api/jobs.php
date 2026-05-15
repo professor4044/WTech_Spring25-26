@@ -10,9 +10,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seeker') {
 }
 
 require_once '../config/database.php';
-require_once '../models/Job.php';
+require_once '../model/job.php';
 
-$jobModel = new Job($pdo);
+$jobModel = new Job($conn);
 
 $q           = $_GET['q']           ?? '';
 $category_id = $_GET['category_id'] ?? '';
