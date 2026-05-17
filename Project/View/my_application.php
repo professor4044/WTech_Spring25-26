@@ -19,7 +19,7 @@
 </nav>
 
 <div class="container">
-    <h2 style="margin-bottom:20px;">My Applicaton</h2>
+    <h2 style="margin-bottom:20px;">My Applications</h2>
 
     <!--if no application-->
     <?php if (empty($applications)): ?>

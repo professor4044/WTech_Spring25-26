@@ -20,10 +20,6 @@ $job_type    = $_GET['job_type']    ?? '';
 $location    = $_GET['location']    ?? '';
 $salary      = $_GET['salary']      ?? '';
 
-if (!empty($q)) {
-    $jobs = $jobModel->searchJobs($q);
-} else {
-    $jobs = $jobModel->filterJobs($category_id, $location, $job_type, $salary);
-}
+$jobs = $jobModel->filterJobs($q, $category_id, $location, $job_type, $salary);
 
 echo json_encode(['jobs' => $jobs]);

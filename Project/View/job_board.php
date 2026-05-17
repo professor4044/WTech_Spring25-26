@@ -97,6 +97,9 @@
     </div>
 </div>
 
+<script>
+  const savedJobIds = <?= json_encode($savedIds) ?>;
+</script>
 <script src="../Public/JS/job_board.js"></script>
 </body>
 </html>
